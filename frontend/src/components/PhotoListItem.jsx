@@ -15,7 +15,7 @@ const PhotoListItem = ({ id, location, urls, username, profile, user, onPhotoCli
 
   return (
     <div className="photo-list__item">
-      <img src={urls.full} alt={`Photos ${id}`} className="photo-list__image" />
+      <img src={urls.regular} alt={`Photos ${id}`} className="photo-list__image" />
       <PhotoFavButton
         isLiked={isFavorited}
         onLikeToggle={() => toggleFavorite(photos.id)}
