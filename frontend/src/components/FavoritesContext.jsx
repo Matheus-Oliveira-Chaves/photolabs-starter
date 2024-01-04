@@ -8,6 +8,7 @@ export const useFavorites = () => {
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
+  
 
   const toggleFavorite = (photoId) => {
     setFavorites((prevFavorites) =>
