@@ -18,6 +18,7 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
       {photo && (
         <div >
           <img
+          
             className="photo-details-modal__image"
             src={photo.urls.regular}
             alt={`Photo ${photo.id}`}
