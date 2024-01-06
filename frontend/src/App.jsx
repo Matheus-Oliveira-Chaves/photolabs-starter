@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { useApplicationData } from './hooks/useApplicationData';
 import TopNavigationBar from './components/TopNavigationBar';
 import photos from 'mocks/photos';
 import PhotoList from 'components/PhotoList';
@@ -6,31 +7,26 @@ import { FavoritesProvider } from 'components/FavoritesContext';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import './App.scss';
 
-
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-  const openModal = (photo) => {
-    console.log('openModal called with photo:', photo);
-    setSelectedPhoto(photo);
-    setIsModalOpen(true);
-  };
-  
-  const closeModal = () => {
-    setSelectedPhoto(null);
-    setIsModalOpen(false);
-  };
-
+  const {
+    state,
+    onPhotoSelect,
+    updateToFavPhotoIds,
+    onClosePhotoDetailsModal,
+  } = useApplicationData();
   return (
     <FavoritesProvider>
       <div className="App">
         <div className="home-route">
           <TopNavigationBar />
-          <PhotoList photos={photos} onPhotoClick={openModal} />
+          <PhotoList photos={photos} onPhotoClick={onPhotoSelect} />
         </div>
-        {isModalOpen && (
-          <PhotoDetailsModal photo={selectedPhoto} onClose={closeModal} />
+        {state.selectedPhoto && (
+          <PhotoDetailsModal
+            photo={state.selectedPhoto}
+            onClose={onClosePhotoDetailsModal}
+            onPhotoClick={onPhotoSelect}
+          />
         )}
       </div>
     </FavoritesProvider>
