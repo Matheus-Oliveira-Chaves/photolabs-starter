@@ -12,8 +12,11 @@ const App = () => {
     state,
     onPhotoSelect,
     updateToFavPhotoIds,
+    onLoadTopic,
     onClosePhotoDetailsModal,
   } = useApplicationData();
+
+  
   return (
     <FavoritesProvider>
       <div className="App">

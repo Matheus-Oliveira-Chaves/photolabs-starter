@@ -9,10 +9,10 @@ const PhotoList = ({ photos, onPhotoClick }) => {
   return (
     <ul className="photo-list">
       {photos.map((photo) => (
-        <li key={photo.id} onClick={() => onPhotoClick(photo)}>
+        <li key={photo.id} >
           {/* Pass the entire photo object to the handler when clicking the list item.
               Attach the `handlePhotoClick` to the `onClick` event of each <li>. */}
-          <PhotoListItem {...photo} />
+          <PhotoListItem onPhotoClick={() => onPhotoClick(photo)}{...photo} />
         </li>
       ))}
     </ul>

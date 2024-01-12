@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
 const FavoritesContext = createContext();
 
@@ -7,14 +7,10 @@ export const useFavorites = () => {
 };
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, dispatchFavorites] = useReducer(favoritesReducer, []);
 
   const toggleFavorite = (photoId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(photoId)
-        ? prevFavorites.filter((id) => id !== photoId)
-        : [...prevFavorites, photoId]
-    );
+    dispatchFavorites({ type: 'TOGGLE_FAVORITE', payload: photoId });
   };
 
   return (
@@ -24,29 +20,36 @@ export const FavoritesProvider = ({ children }) => {
   );
 };
 
+const favoritesReducer = (state, action) => {
+  switch (action.type) {
+    case 'TOGGLE_FAVORITE':
+      return state.includes(action.payload)
+        ? state.filter((id) => id !== action.payload)
+        : [...state, action.payload];
+    default:
+      return state;
+  }
+};
+
 export const useApplicationData = () => {
-  const [state, setState] = useState({
-    // Define your initial state properties here
+  const initialState = {
     selectedPhoto: null,
     // Add other state properties as needed
-  });
+  };
+
+  const [state, dispatch] = useReducer(applicationReducer, initialState);
 
   const onPhotoSelect = (photo) => {
-    setState((prevState) => ({
-      ...prevState,
-      selectedPhoto: photo,
-    }));
+    dispatch({ type: 'SELECT_PHOTO', payload: photo });
   };
 
   const updateToFavPhotoIds = (photoId) => {
+    dispatch({ type: 'UPDATE_FAV_PHOTO_IDS', payload: photoId });
     // Implement logic to update favorite photos if needed
   };
 
   const onClosePhotoDetailsModal = () => {
-    setState((prevState) => ({
-      ...prevState,
-      selectedPhoto: null,
-    }));
+    dispatch({ type: 'CLOSE_PHOTO_DETAILS_MODAL' });
   };
 
   // Add other actions as needed
@@ -58,4 +61,16 @@ export const useApplicationData = () => {
     onClosePhotoDetailsModal,
     // Add other actions to the returned object
   };
+};
+
+const applicationReducer = (state, action) => {
+  switch (action.type) {
+    case 'SELECT_PHOTO':
+      return { ...state, selectedPhoto: action.payload };
+    case 'CLOSE_PHOTO_DETAILS_MODAL':
+      return { ...state, selectedPhoto: null };
+    // Handle other action types as needed
+    default:
+      return state;
+  }
 };

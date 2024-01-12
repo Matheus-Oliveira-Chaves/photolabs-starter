@@ -1,11 +1,15 @@
-import React from 'react';
-import PhotoListItem from 'components/PhotoListItem';
-import photos from 'mocks/photos';
-import '../styles/PhotoDetailsModal.scss';
-import '../styles/PhotoList.scss';
-import closeSymbol from '../assets/closeSymbol.svg';
+import React from "react";
+import PhotoListItem from "components/PhotoListItem";
+import photos from "mocks/photos";
+import PhotoFavButton from "components/PhotoFavButton";
+import { useFavorites } from "components/FavoritesContext";
+import "../styles/PhotoDetailsModal.scss";
+import "../styles/PhotoList.scss";
+import closeSymbol from "../assets/closeSymbol.svg";
 
 const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
+  const { favorites, toggleFavorite } = useFavorites();
+  const isFavorited = favorites.includes(photo.id);
 
   return (
     <div className="photo-details-modal">
@@ -16,13 +20,21 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
       </div>
       {/* Render details of the selected photo here */}
       {photo && (
-        <div >
-          <img
-          
-            className="photo-details-modal__image"
-            src={photo.urls.regular}
-            alt={`Photo ${photo.id}`}
-          />
+        <>
+          <div className="photo-details-modal__image-container">
+            <img
+              className="photo-details-modal__image"
+              src={photo.urls.regular}
+              alt={`Photo ${photo.id}`}
+            />
+            <div className="photo-details-modal__favorite-button">
+              <PhotoFavButton
+                isLiked={isFavorited}
+                onLikeToggle={() => toggleFavorite(photos.id)}
+              />
+            </div>
+          </div>
+
           <div className="photo-details-modal__photographer-details">
             <img
               className="photo-details-modal__photographer-profile"
@@ -35,21 +47,20 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
                 {`${photo.location.city}, ${photo.location.country}`}
               </p>
             </div>
-            </div>
-            <div className="photo-details-modal__header"><p>Similar Photos</p></div>
-            <div className="photo-details-modal__images">
-             <ul className="photo-list">
-      {photos.map((photo) => (
-        <li key={photo.id} onClick={() => onPhotoClick(photo)}>
-         
-          <PhotoListItem {...photo} />
-        </li>
-       ))}
-    </ul> 
-            
           </div>
-          {/* Add more details as needed */}
-        </div>
+          <div className="photo-details-modal__header">
+            <p>Similar Photos</p>
+          </div>
+          <div className="photo-details-modal__images">
+            <ul className="photo-list">
+              {photos.map((photo) => (
+                <li key={photo.id} onClick={() => onPhotoClick(photo)}>
+                  <PhotoListItem {...photo} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
       )}
     </div>
   );
