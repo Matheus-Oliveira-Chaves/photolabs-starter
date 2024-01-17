@@ -1,11 +1,11 @@
-import React from 'react';
-import { useApplicationData } from './hooks/useApplicationData';
-import TopNavigationBar from './components/TopNavigationBar';
-import photos from 'mocks/photos';
-import PhotoList from 'components/PhotoList';
-import { FavoritesProvider } from 'components/FavoritesContext';
-import PhotoDetailsModal from 'routes/PhotoDetailsModal';
-import './App.scss';
+import React from "react";
+import { useApplicationData } from "./hooks/useApplicationData";
+import TopNavigationBar from "./components/TopNavigationBar";
+
+import PhotoList from "components/PhotoList";
+import { FavoritesProvider } from "components/FavoritesContext";
+import PhotoDetailsModal from "routes/PhotoDetailsModal";
+import "./App.scss";
 
 const App = () => {
   const {
@@ -16,13 +16,12 @@ const App = () => {
     onClosePhotoDetailsModal,
   } = useApplicationData();
 
-  
   return (
     <FavoritesProvider>
       <div className="App">
         <div className="home-route">
           <TopNavigationBar />
-          <PhotoList photos={photos} onPhotoClick={onPhotoSelect} />
+          <PhotoList photos={state.photoData} onPhotoClick={onPhotoSelect} />
         </div>
         {state.selectedPhoto && (
           <PhotoDetailsModal

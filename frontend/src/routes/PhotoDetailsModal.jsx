@@ -42,7 +42,7 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
               alt={`Profile ${photo.user.username}`}
             />
             <div className="photo-details-modal__photographer-info">
-              <p>{photo.user.name}</p>
+              <p className="username">{photo.user.name}</p>
               <p className="photo-details-modal__photographer-location">
                 {`${photo.location.city}, ${photo.location.country}`}
               </p>

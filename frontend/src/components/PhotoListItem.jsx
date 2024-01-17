@@ -31,10 +31,7 @@ const PhotoListItem = ({
           onClick={handlePhotoClick}
         />
 
-        <PhotoFavButton
-          isLiked={isFavorited}
-          onLikeToggle={() => toggleFavorite(photos.id)}
-        />
+        <PhotoFavButton photoId={id} />
       </div>
       <div className="photo-list__user-details">
         <img

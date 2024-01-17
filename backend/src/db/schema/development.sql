@@ -1,3 +1,7 @@
+
+
+
+
 INSERT INTO USER_ACCOUNT (ID, FULLNAME, USERNAME, PROFILE_URL)
 VALUES 
   (1, 'John Doe', 'jdoe', 'profile-1.jpg'),
