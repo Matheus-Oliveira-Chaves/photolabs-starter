@@ -56,6 +56,8 @@ Enjoy using PhotoLabs!
 
 ## Screenshots
 
-![Alt text](image.png)
-![Alt text](image.png)
-![Alt text](image-1.png)
+!["Screenshot of the main page."](https://github.com/Matheus-Oliveira-Chaves/photolabs-starter/blob/main/docs/main.png)
+
+!["Screenshot of th Side Peek and their related photos by topic."](https://github.com/Matheus-Oliveira-Chaves/photolabs-starter/blob/main/docs/modal.png)
+
+!["Screenshot of th Side Peek with favorited photos and their related photos by topic."](https://github.com/Matheus-Oliveira-Chaves/photolabs-starter/blob/main/docs/modal_topic.png)
