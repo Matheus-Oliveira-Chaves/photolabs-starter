@@ -1,14 +1,14 @@
-import React from 'react';
-import FavIcon from './FavIcon';
-import { useFavorites } from './FavoritesContext';
-import '../styles/FavBadge.scss';
+import React from "react";
+import FavIcon from "./FavIcon";
+import { useFavorites } from "./FavoritesContext";
+import "../styles/FavBadge.scss";
 
 const FavBadge = () => {
   const { favorites } = useFavorites();
   const isFavPhotoExist = favorites.length > 0;
 
   return (
-    <div className={`fav-badge ${isFavPhotoExist ? 'show-alert' : ''}`}>
+    <div className={`fav-badge ${isFavPhotoExist ? "show-alert" : ""}`}>
       <FavIcon selected={isFavPhotoExist} displayAlert={isFavPhotoExist} />
     </div>
   );

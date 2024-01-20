@@ -1,7 +1,6 @@
 import React from "react";
 import { useApplicationData } from "./hooks/useApplicationData";
 import TopNavigationBar from "./components/TopNavigationBar";
-
 import PhotoList from "components/PhotoList";
 import { FavoritesProvider } from "components/FavoritesContext";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
@@ -11,16 +10,19 @@ const App = () => {
   const {
     state,
     onPhotoSelect,
-    updateToFavPhotoIds,
     onLoadTopic,
     onClosePhotoDetailsModal,
+    getPhotosByTopicAction,
   } = useApplicationData();
-
+  console.log("onLoadTopic", onLoadTopic);
   return (
     <FavoritesProvider>
       <div className="App">
         <div className="home-route">
-          <TopNavigationBar />
+          <TopNavigationBar
+            topics={state.topicData}
+            onLoadTopic={getPhotosByTopicAction}
+          />
           <PhotoList photos={state.photoData} onPhotoClick={onPhotoSelect} />
         </div>
         {state.selectedPhoto && (

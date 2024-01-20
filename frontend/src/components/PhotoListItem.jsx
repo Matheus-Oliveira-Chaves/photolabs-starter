@@ -18,7 +18,7 @@ const PhotoListItem = ({
     }
   };
 
-  const { favorites, toggleFavorite } = useFavorites();
+  const { favorites } = useFavorites();
   const isFavorited = favorites.includes(id);
 
   return (

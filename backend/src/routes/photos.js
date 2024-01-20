@@ -56,6 +56,7 @@ module.exports = db => {
       FROM photo
       JOIN user_account ON user_account.id = photo.user_id;
     `).then(({ rows }) => {
+      console.log("row", rows);
       response.json(rows[0].photo_data);
     });
   });

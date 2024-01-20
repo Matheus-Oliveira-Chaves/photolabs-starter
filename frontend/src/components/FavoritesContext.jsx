@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 const FavoritesContext = createContext();
 
@@ -8,7 +8,6 @@ export const useFavorites = () => {
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
-  
 
   const toggleFavorite = (photoId) => {
     setFavorites((prevFavorites) =>

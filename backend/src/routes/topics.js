@@ -1,25 +1,28 @@
 const router = require("express").Router();
 
-module.exports = db => {
+module.exports = (db) => {
   router.get("/topics", (request, response) => {
-    db.query(`
+    db.query(
+      `
       SELECT 
       topic.id,
       topic.title,
       topic.slug
       FROM topic
-    `).then(({ rows: topics }) => {
+    `
+    ).then(({ rows: topics }) => {
       response.json(topics);
     });
   });
-  
+
   router.get("/topics/photos/:id", (request, response) => {
     const protocol = request.protocol;
     const host = request.hostname;
     const port = process.env.PORT || 8001;
     const serverUrl = `${protocol}://${host}:${port}`;
 
-    db.query(`
+    db.query(
+      `
     SELECT 
       json_agg(
           json_build_object(
@@ -69,7 +72,8 @@ module.exports = db => {
       JOIN photo ON photo.topic_id = topic.id
       JOIN user_account ON user_account.id = photo.user_id
       WHERE topic.id = ${request.params.id}
-    `).then(({ rows }) => {
+    `
+    ).then(({ rows }) => {
       response.json(rows[0].topic_photo_data);
     });
   });

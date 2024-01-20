@@ -1,6 +1,5 @@
 import React from "react";
 import PhotoListItem from "components/PhotoListItem";
-import photos from "mocks/photos";
 import PhotoFavButton from "components/PhotoFavButton";
 import { useFavorites } from "components/FavoritesContext";
 import "../styles/PhotoDetailsModal.scss";
@@ -8,9 +7,9 @@ import "../styles/PhotoList.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 
 const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
-  const { favorites, toggleFavorite } = useFavorites();
+  const { favorites } = useFavorites();
   const isFavorited = favorites.includes(photo.id);
-
+  console.log(photo);
   return (
     <div className="photo-details-modal">
       <div className="photo-details-modal__top-bar">
@@ -18,7 +17,6 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
           <img src={closeSymbol} alt="close symbol" />
         </button>
       </div>
-      {/* Render details of the selected photo here */}
       {photo && (
         <>
           <div className="photo-details-modal__image-container">
@@ -28,10 +26,7 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
               alt={`Photo ${photo.id}`}
             />
             <div className="photo-details-modal__favorite-button">
-              <PhotoFavButton
-                isLiked={isFavorited}
-                onLikeToggle={() => toggleFavorite(photos.id)}
-              />
+              <PhotoFavButton isLiked={isFavorited} photoId={photo.id} />
             </div>
           </div>
 
@@ -53,9 +48,12 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
           </div>
           <div className="photo-details-modal__images">
             <ul className="photo-list">
-              {photos.map((photo) => (
-                <li key={photo.id} onClick={() => onPhotoClick(photo)}>
-                  <PhotoListItem {...photo} />
+              {photo.similar_photos.map((photo) => (
+                <li key={photo.id}>
+                  <PhotoListItem
+                    onPhotoClick={() => onPhotoClick(photo)}
+                    {...photo}
+                  />
                 </li>
               ))}
             </ul>

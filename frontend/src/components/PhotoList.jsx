@@ -4,15 +4,11 @@ import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const PhotoList = ({ photos, onPhotoClick }) => {
-  // Ensure `onPhotoClick` is part of the function parameters.
-
   return (
     <ul className="photo-list">
       {photos.map((photo) => (
-        <li key={photo.id} >
-          {/* Pass the entire photo object to the handler when clicking the list item.
-              Attach the `handlePhotoClick` to the `onClick` event of each <li>. */}
-          <PhotoListItem onPhotoClick={() => onPhotoClick(photo)}{...photo} />
+        <li key={photo.id}>
+          <PhotoListItem onPhotoClick={() => onPhotoClick(photo)} {...photo} />
         </li>
       ))}
     </ul>
