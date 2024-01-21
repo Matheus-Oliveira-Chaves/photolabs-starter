@@ -22,7 +22,7 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
           <div className="photo-details-modal__image-container">
             <img
               className="photo-details-modal__image"
-              src={photo.urls.regular}
+              src={photo.urls.full}
               alt={`Photo ${photo.id}`}
             />
             <div className="photo-details-modal__favorite-button">

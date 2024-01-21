@@ -39,6 +39,8 @@ Start PostgreSQL:
 startpostgres
 ```
 
+To set up the database, follow backend [README](https://github.com/Matheus-Oliveira-Chaves/photolabs-starter/blob/main/backend/README.md) file
+
 Run the following command to start the backend server:
 
 ```sh
