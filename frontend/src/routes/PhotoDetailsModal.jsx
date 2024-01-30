@@ -6,10 +6,12 @@ import "../styles/PhotoDetailsModal.scss";
 import "../styles/PhotoList.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 
-const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
+const PhotoDetailsModal = ({ photo, onClose, onPhotoClick, photoData }) => {
   const { favorites } = useFavorites();
   const isFavorited = favorites.includes(photo.id);
-  console.log(photo);
+
+
+
   return (
     <div className="photo-details-modal">
       <div className="photo-details-modal__top-bar">
@@ -44,19 +46,25 @@ const PhotoDetailsModal = ({ photo, onClose, onPhotoClick }) => {
             </div>
           </div>
           <div className="photo-details-modal__header">
-            <p>Similar Photos</p>
+            <h2>Similar Photos</h2>
           </div>
           <div className="photo-details-modal__images">
             <ul className="photo-list">
-              {photo.similar_photos.map((photo) => (
+              {photo.similar_photos.map((photo) => {
+                const findPhoto = photoData.find(p => photo.id === p.id);
+                return (
+
                 <li key={photo.id}>
                   <PhotoListItem
-                    onPhotoClick={() => onPhotoClick(photo)}
-                    {...photo}
+                    onPhotoClick={() => onPhotoClick(findPhoto)}
+                    {...findPhoto}
+
+              
                   />
                 </li>
-              ))}
+              )})}
             </ul>
+            
           </div>
         </>
       )}

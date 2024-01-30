@@ -11,10 +11,11 @@ const PhotoListItem = ({
   profile,
   user,
   onPhotoClick,
+  similar_photos,
 }) => {
   const handlePhotoClick = () => {
     if (onPhotoClick) {
-      onPhotoClick({ id, location, urls, username, user, profile });
+      onPhotoClick({ id, location, urls, username, user, profile, similar_photos });
     }
   };
 

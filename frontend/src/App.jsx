@@ -10,11 +10,9 @@ const App = () => {
   const {
     state,
     onPhotoSelect,
-    onLoadTopic,
     onClosePhotoDetailsModal,
     getPhotosByTopicAction,
   } = useApplicationData();
-  console.log("onLoadTopic", onLoadTopic);
   return (
     <FavoritesProvider>
       <div className="App">
@@ -28,6 +26,7 @@ const App = () => {
         {state.selectedPhoto && (
           <PhotoDetailsModal
             photo={state.selectedPhoto}
+            photoData={state.photoData}
             onClose={onClosePhotoDetailsModal}
             onPhotoClick={onPhotoSelect}
           />
